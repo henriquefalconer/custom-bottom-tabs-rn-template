@@ -1,18 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, View } from "react-native";
 
-export default function App() {
+import Routes from "./src/routes";
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <View style={{ flex: 1, backgroundColor: "#2f7853" }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#2f7853" }}>
+        <StatusBar barStyle="light-content" />
+        <Routes />
+      </SafeAreaView>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
