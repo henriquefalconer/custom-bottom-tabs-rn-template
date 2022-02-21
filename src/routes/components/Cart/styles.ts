@@ -1,8 +1,22 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
+
+export const Background = styled.View`
+  background: #2f7853;
+  flex: 1;
+  margin-bottom: -1px;
+`;
+
+export const Title = styled.Text<{ height: number }>`
+  ${({ height }) => css`
+    font-size: 20px;
+    margin: 0 10px;
+    height: ${height}px;
+    color: white;
+    font-weight: bold;
+  `}
+`;
 
 export const ScrollWrapper = styled.ScrollView`
-  background: #2f7853;
-  padding-top: 10px;
   padding-bottom: 10px;
 `;
 

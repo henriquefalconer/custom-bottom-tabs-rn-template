@@ -1,24 +1,26 @@
 import React, { useMemo, useState } from "react";
-import { TouchableOpacity, useWindowDimensions, View } from "react-native";
-
+import {
+  Platform,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MotiView } from "moti";
 import { Path } from "react-native-svg";
-
 import Cart from "../Cart";
-
 import * as S from "./styles";
 
 type IconComponent = React.FC<{ color: string }>;
 
-const SVG_WIDTH = 460;
-const SVG_HEIGHT = 117;
+const SVG_WIDTH_SRC = 460;
+const SVG_HEIGHT_SRC = 117;
 const TARGET_PHONE_WIDTH = 375; // iPhone 7 (2016)
 
-const hitSlop = { top: 10, bottom: 10, left: 20, right: 20 };
+const CART_HEIGHT_SCALE = 0.85;
 
-export const SCROLL_SPACE_BUFFER = 70;
+const hitSlop = { top: 10, bottom: 10, left: 20, right: 20 };
 
 const TabBar: React.FC<BottomTabBarProps> = ({
   state: { routes, index },
@@ -49,25 +51,25 @@ const TabBar: React.FC<BottomTabBarProps> = ({
   const width = Math.ceil(dimensions.width);
 
   const svgWidth = width;
-  const svgHeight = Math.floor((width / SVG_WIDTH) * SVG_HEIGHT) - 1;
+  const svgHeight = (width / SVG_WIDTH_SRC) * SVG_HEIGHT_SRC;
 
-  const cartHeight = dimensions.height * 0.95;
+  const cartHeight = dimensions.height * CART_HEIGHT_SCALE;
 
   return (
     <S.ExtWrapper>
       <MotiView
         style={{ height: cartHeight }}
         animate={{
-          top: cartFocused ? SCROLL_SPACE_BUFFER : cartHeight - svgHeight,
+          top: cartFocused ? 0 : cartHeight - svgHeight,
         }}
-        transition={{ type: "spring" }}
+        transition={{ type: "spring", damping: 15, mass: 0.48 }}
       >
         <S.Wrapper>
           <S.SVGWrapper
             height={svgHeight}
             width={svgWidth}
             preserveAspectRatio="xMinYMin slice"
-            viewBox={`0 0 ${SVG_WIDTH} ${SVG_WIDTH}`}
+            viewBox={`0 0 ${SVG_WIDTH_SRC} ${SVG_WIDTH_SRC}`}
           >
             <Path
               fill="#2F7853"
@@ -84,23 +86,29 @@ const TabBar: React.FC<BottomTabBarProps> = ({
           >
             <FontAwesome5 name="shopping-bag" size={24} color="#2f7853" />
           </S.CircleButton>
-          <S.Background bottom={(width / TARGET_PHONE_WIDTH) * 20}>
-            {left.map(({ Icon, focused, onPress, key }) => (
-              <TouchableOpacity onPress={onPress} key={key} hitSlop={hitSlop}>
-                <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
-              </TouchableOpacity>
-            ))}
-            {left.map((_, i) => (
-              <View key={i} />
-            ))}
-            {right.map(({ Icon, focused, onPress, key }) => (
-              <TouchableOpacity onPress={onPress} key={key} hitSlop={hitSlop}>
-                <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
-              </TouchableOpacity>
-            ))}
-          </S.Background>
+          <MotiView
+            animate={{ opacity: cartFocused ? 0.2 : 1 }}
+            transition={{ type: "timing" }}
+            pointerEvents={cartFocused ? "none" : "auto"}
+          >
+            <S.Background bottom={(width / TARGET_PHONE_WIDTH) * 20}>
+              {left.map(({ Icon, focused, onPress, key }) => (
+                <TouchableOpacity onPress={onPress} key={key} hitSlop={hitSlop}>
+                  <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
+                </TouchableOpacity>
+              ))}
+              {left.map((_, i) => (
+                <View key={i} />
+              ))}
+              {right.map(({ Icon, focused, onPress, key }) => (
+                <TouchableOpacity onPress={onPress} key={key} hitSlop={hitSlop}>
+                  <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
+                </TouchableOpacity>
+              ))}
+            </S.Background>
+          </MotiView>
         </S.Wrapper>
-        <Cart />
+        <Cart visible={cartFocused} />
       </MotiView>
     </S.ExtWrapper>
   );
