@@ -1,10 +1,14 @@
 import React, { useMemo } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, useWindowDimensions, View } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Path } from "react-native-svg";
 import * as S from "./styles";
 
 type IconComponent = React.FC<{ color: string }>;
+
+const SVG_WIDTH = 460;
+const SVG_HEIGHT = 117;
+const TARGET_PHONE_WIDTH = 375; // iPhone 7 (2016)
 
 const TabBar: React.FC<BottomTabBarProps> = ({
   state: { routes, index },
@@ -29,26 +33,31 @@ const TabBar: React.FC<BottomTabBarProps> = ({
     return [arr.slice(0, mid), arr[mid - 0.5], arr.slice(mid + 0.5)] as const;
   }, [routes, descriptors]);
 
+  const { width } = useWindowDimensions();
+
   return (
     <S.Wrapper>
       <S.SVGWrapper
-        height="100"
-        width="100%"
+        height={(width / SVG_WIDTH) * SVG_HEIGHT}
+        width={width}
         preserveAspectRatio="xMinYMin slice"
-        viewBox="0 0 100 100" // viewBox="0 0 [largura do SVG] [largura do SVG]"
+        viewBox={`0 0 ${SVG_WIDTH} ${SVG_WIDTH}`}
       >
         <Path
           fill="#2F7853"
-          d="M0 26.2175V0.782715C0 5.58519 3.89318 9.47837 8.69565 9.47837H31.1016C33.8045 9.48224 36.2561 10.5585 38.0537 12.3044H38.0543L38.0795 12.3297C38.1321 12.3811 38.1842 12.4332 38.2356 12.4858L42.9379 17.188C46.8432 21.0933 53.1748 21.0933 57.08 17.188L61.4855 12.7826C63.3126 10.757 65.9566 9.48258 68.8984 9.47837H91.3044C96.1068 9.47837 100 5.58519 100 0.782715V26.2175H0Z"
+          // Importante: deve ser "all-relative path" (https://codepen.io/leaverou/pen/RmwzKv)
+          d="M460,0v117h-460v-117c0,22.091,17.909,40,40,40h103c12.46,0,23.763,4.954,32.047,13h0.003l0.105,0.106c0.249,0.243,0.496,0.49,0.739,0.739l21.62,21.62c17.965,17.964,47.09,17.964,65.054,0l20.262,-20.262c8.42,-9.335,20.61,-15.203,34.17,-15.203h103c22.091,0,40,-17.909,40,-40z"
         />
       </S.SVGWrapper>
       <S.CircleButton
         color={middle?.focused ? "#fcfcfc" : "#fdd231"}
         onPress={middle?.onPress}
+        size={(width / TARGET_PHONE_WIDTH) * 64}
+        bottom={(width / TARGET_PHONE_WIDTH) * 10}
       >
         {middle && <middle.Icon color="#2f7853" />}
       </S.CircleButton>
-      <S.Background>
+      <S.Background bottom={(width / TARGET_PHONE_WIDTH) * 20}>
         {left.map(({ Icon, focused, onPress, key }) => (
           <TouchableOpacity onPress={onPress} key={key}>
             <Icon color={focused ? "#fcfcfc" : "#94bcad"} />

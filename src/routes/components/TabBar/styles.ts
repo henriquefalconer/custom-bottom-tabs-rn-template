@@ -8,28 +8,34 @@ export const Wrapper = styled.View`
 
 export const SVGWrapper = styled(Svg)`
   position: absolute;
-  box-shadow: 0 -4px 3px #ddd;
+  box-shadow: 0 -6px 3px #ddd;
 `;
 
-export const CircleButton = styled.TouchableOpacity<{ color: string }>`
-  ${({ color }) => css`
+export const CircleButton = styled.TouchableOpacity<{
+  color: string;
+  size: number;
+  bottom: number;
+}>`
+  ${({ color, size, bottom }) => css`
     background: ${color};
-    border-radius: 32px;
-    width: 64px;
-    height: 64px;
+    border-radius: ${size / 2}px;
+    width: ${size}px;
+    height: ${size}px;
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
-    bottom: 8px;
+    bottom: ${bottom}px;
     box-shadow: 0 4px 11px #d3d3d3;
   `}
 `;
 
-export const Background = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  top: -20px;
+export const Background = styled.View<{ bottom: number }>`
+  ${({ bottom }) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    bottom: ${bottom}px;
+  `}
 `;

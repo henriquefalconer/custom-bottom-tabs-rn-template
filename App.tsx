@@ -6,7 +6,7 @@ const App = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "#2f7853" }}>
       <SafeAreaView style={{ flex: 1, backgroundColor: "#2f7853" }}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="light-content" backgroundColor="#2f7853" />
         <Routes />
       </SafeAreaView>
     </View>
