@@ -12,7 +12,6 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { MotiView } from "moti";
 import Cart from "../Cart";
 import * as S from "./styles";
 

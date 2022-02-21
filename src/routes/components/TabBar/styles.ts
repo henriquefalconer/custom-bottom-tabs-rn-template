@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components/native";
 import Svg from "react-native-svg";
 import { MotiView } from "moti";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export const Wrapper = styled.View`
   justify-content: flex-end;
 `;
 
-export const ExtWrapper = styled.View`
+export const ExtWrapper = styled(GestureHandlerRootView)`
   position: absolute;
   width: 100%;
   bottom: 0;
