@@ -27,6 +27,7 @@ export const CircleButton = styled.TouchableOpacity<{
     align-self: center;
     bottom: ${bottom}px;
     box-shadow: 0 4px 11px #d3d3d3;
+    elevation: 4;
   `}
 `;
 
