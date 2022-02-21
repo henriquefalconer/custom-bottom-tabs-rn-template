@@ -21,6 +21,7 @@ const Cart: React.FC<CartProps> = ({ visible }) => {
         <S.ScrollWrapper
           contentContainerStyle={{ paddingBottom: TITLE_HEIGHT }}
           scrollIndicatorInsets={{ bottom: TITLE_HEIGHT + 5 }}
+          overScrollMode="never"
         >
           {Array.from({ length: 20 }).map((_, i) => (
             <CartItem key={i} onRemove={() => {}} />

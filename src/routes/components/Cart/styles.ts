@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native";
+import { ScrollView } from 'react-native-gesture-handler';
 
 export const Background = styled.View`
   background: #2f7853;
@@ -16,7 +17,7 @@ export const Title = styled.Text<{ height: number }>`
   `}
 `;
 
-export const ScrollWrapper = styled.ScrollView`
+export const ScrollWrapper = styled(ScrollView)`
   padding-bottom: 10px;
 `;
 
