@@ -31,7 +31,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({
     }));
     const mid = arr.length / 2;
     return [arr.slice(0, mid), arr[mid - 0.5], arr.slice(mid + 0.5)] as const;
-  }, [routes, descriptors]);
+  }, [routes, descriptors, index, emit, navigate]);
 
   const width = Math.ceil(useWindowDimensions().width);
 
