@@ -1,11 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  Entypo,
-  FontAwesome5,
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import TabBar from "./components/TabBar";
 
@@ -13,7 +8,6 @@ import Screen1 from "../screens/Screen1";
 import Screen2 from "../screens/Screen2";
 import Screen3 from "../screens/Screen3";
 import Screen4 from "../screens/Screen4";
-import Screen5 from "../screens/Screen5";
 
 const AppTab = createBottomTabNavigator();
 
@@ -46,18 +40,8 @@ const Routes = () => {
           }}
         />
         <AppTab.Screen
-          name="Cart"
-          component={Screen3}
-          options={{
-            tabBarLabel: "Cart",
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="shopping-bag" size={24} color={color} />
-            ),
-          }}
-        />
-        <AppTab.Screen
           name="Favorites"
-          component={Screen4}
+          component={Screen3}
           options={{
             tabBarLabel: "Favorites",
             tabBarIcon: ({ color }) => (
@@ -67,7 +51,7 @@ const Routes = () => {
         />
         <AppTab.Screen
           name="Notifications"
-          component={Screen5}
+          component={Screen4}
           options={{
             tabBarLabel: "Notifications",
             tabBarIcon: ({ color }) => (

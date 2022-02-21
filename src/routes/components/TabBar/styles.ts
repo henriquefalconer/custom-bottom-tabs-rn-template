@@ -2,8 +2,13 @@ import styled, { css } from "styled-components/native";
 import Svg from "react-native-svg";
 
 export const Wrapper = styled.View`
-  background: #fcfcfc;
   justify-content: flex-end;
+`;
+
+export const ExtWrapper = styled.View`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 `;
 
 export const SVGWrapper = styled(Svg)`
