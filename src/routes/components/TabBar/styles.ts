@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
 import Svg from "react-native-svg";
+import { MotiView } from "moti";
 
 export const Wrapper = styled.View`
   justify-content: flex-end;
@@ -36,7 +37,7 @@ export const CircleButton = styled.TouchableOpacity<{
   `}
 `;
 
-export const Background = styled.View<{ bottom: number }>`
+export const Background = styled(MotiView)<{ bottom: number }>`
   ${({ bottom }) => css`
     display: flex;
     flex-direction: row;

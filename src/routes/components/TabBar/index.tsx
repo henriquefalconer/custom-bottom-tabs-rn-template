@@ -122,35 +122,26 @@ const TabBar: React.FC<BottomTabBarProps> = ({
             >
               <FontAwesome5 name="shopping-bag" size={24} color="#2f7853" />
             </S.CircleButton>
-            <MotiView
+            <S.Background
               animate={{ opacity: cartFocused ? 0.2 : 1 }}
               transition={{ type: "timing" }}
               pointerEvents={cartFocused ? "none" : "auto"}
+              bottom={(width / TARGET_PHONE_WIDTH) * 20}
             >
-              <S.Background bottom={(width / TARGET_PHONE_WIDTH) * 20}>
-                {left.map(({ Icon, focused, onPress, key }) => (
-                  <TouchableOpacity
-                    onPress={onPress}
-                    key={key}
-                    hitSlop={hitSlop}
-                  >
-                    <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
-                  </TouchableOpacity>
-                ))}
-                {left.map((_, i) => (
-                  <View key={i} />
-                ))}
-                {right.map(({ Icon, focused, onPress, key }) => (
-                  <TouchableOpacity
-                    onPress={onPress}
-                    key={key}
-                    hitSlop={hitSlop}
-                  >
-                    <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
-                  </TouchableOpacity>
-                ))}
-              </S.Background>
-            </MotiView>
+              {left.map(({ Icon, focused, onPress, key }) => (
+                <TouchableOpacity onPress={onPress} key={key} hitSlop={hitSlop}>
+                  <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
+                </TouchableOpacity>
+              ))}
+              {left.map((_, i) => (
+                <View key={i} />
+              ))}
+              {right.map(({ Icon, focused, onPress, key }) => (
+                <TouchableOpacity onPress={onPress} key={key} hitSlop={hitSlop}>
+                  <Icon color={focused ? "#fcfcfc" : "#94bcad"} />
+                </TouchableOpacity>
+              ))}
+            </S.Background>
           </S.Wrapper>
           <Cart visible={cartFocused} />
         </Animated.View>
