@@ -1,3 +1,4 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   Entypo,
@@ -8,8 +9,11 @@ import {
 
 import TabBar from "./components/TabBar";
 
-import Screen from "../screens/Screen";
-import { NavigationContainer } from "@react-navigation/native";
+import Screen1 from "../screens/Screen1";
+import Screen2 from "../screens/Screen2";
+import Screen3 from "../screens/Screen3";
+import Screen4 from "../screens/Screen4";
+import Screen5 from "../screens/Screen5";
 
 const AppTab = createBottomTabNavigator();
 
@@ -23,7 +27,7 @@ const Routes = () => {
       >
         <AppTab.Screen
           name="Shopping"
-          component={Screen}
+          component={Screen1}
           options={{
             tabBarLabel: "Shopping",
             tabBarIcon: ({ color }) => (
@@ -33,7 +37,7 @@ const Routes = () => {
         />
         <AppTab.Screen
           name="NearMe"
-          component={Screen}
+          component={Screen2}
           options={{
             tabBarLabel: "NearMe",
             tabBarIcon: ({ color }) => (
@@ -43,7 +47,7 @@ const Routes = () => {
         />
         <AppTab.Screen
           name="Cart"
-          component={Screen}
+          component={Screen3}
           options={{
             tabBarLabel: "Cart",
             tabBarIcon: ({ color }) => (
@@ -53,7 +57,7 @@ const Routes = () => {
         />
         <AppTab.Screen
           name="Favorites"
-          component={Screen}
+          component={Screen4}
           options={{
             tabBarLabel: "Favorites",
             tabBarIcon: ({ color }) => (
@@ -63,7 +67,7 @@ const Routes = () => {
         />
         <AppTab.Screen
           name="Notifications"
-          component={Screen}
+          component={Screen5}
           options={{
             tabBarLabel: "Notifications",
             tabBarIcon: ({ color }) => (
